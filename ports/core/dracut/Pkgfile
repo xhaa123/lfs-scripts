@@ -1,0 +1,21 @@
+# Description: An event driven initramfs infrastructure
+# URL:         https://dracut.wiki.kernel.org
+# Maintainer:  
+# Depends on:  cpio
+
+name=dracut
+version=051
+release=1
+source=(https://github.com/dracutdevs/dracut/archive/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+    ./configure --sysconfdir=/etc \
+                --prefix=/usr     \
+                --libdir=/usr/lib \
+                --systemdsystemunitdir=/usr/lib/systemd/system \
+                --bashcompletiondir=$(pkg-config --variable=completionsdir bash-completion)
+    make
+    make DESTDIR=$PKG install 
+}

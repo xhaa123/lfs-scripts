@@ -1,0 +1,108 @@
+# Description: Init system to control boot, execution and halt of a linux system
+# URL:         http://www.freedesktop.org/wiki/Software/systemd/
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on: pam lz4 gnu-efi 
+
+name=systemd
+version=247
+release=1
+source=(https://github.com/systemd/systemd/archive/v$version/$name-$version.tar.gz
+        https://lfs-hk.koddos.net/patches/lfs/development/$name-$version-upstream_fixes-1.patch)
+
+build() {
+    	cd $name-$version
+
+         patch -Np1 -i $SRC/$name-$version-upstream_fixes-1.patch
+
+#        mkdir -pv $PKG/usr/bin
+#        ln -svf /bin/true /usr/bin/xsltproc
+
+#        sed '181,$ d' -i src/resolve/meson.build
+
+        sed -i 's/GROUP="render"/GROUP="video"/' rules.d/50-udev-default.rules.in
+
+        if [ -d /tools ]; then rm -fv /usr/lib/lib{blkid,uuid,mount}.so*; fi
+
+        [ -d /tools ] && \
+        for file in /tools/lib/lib{blkid,mount,uuid}.so*; do
+            ln -svf $file /usr/lib/
+        done
+
+        mkdir -p build
+        cd       build
+
+        PKG_CONFIG_PATH="/usr/lib/pkgconfig:/tools/lib/pkgconfig" \
+        LANG=en_US.UTF-8                   \
+        CFLAGS+=" -Wno-format-overflow"    \
+        meson --prefix=/usr                \
+              --sysconfdir=/etc            \
+              --localstatedir=/var         \
+              -Dblkid=true                 \
+              -Dbuildtype=release          \
+              -Ddefault-dnssec=no          \
+              -Dfirstboot=false            \
+              -Dinstall-tests=false        \
+              -Dldconfig=false             \
+              -Dmount-path=/bin/mount      \
+              -Dsulogin-path=/sbin/sulogin \
+              -Dumount-path=/bin/umount    \
+              -Dkmod-path=/bin/kmod        \
+              -Drootprefix=                \
+              -Drootlibdir=/lib            \
+              -Dsplit-usr=true             \
+              -Dsysusers=false             \
+              -Db_lto=false                \
+              -Dgnutls=false               \
+              -Dman=false                  \
+              -Dhtml=false                 \
+              -Drpmmacrosdir=no            \
+              -Dhomed=false                \
+              -Duserdb=false               \
+              -Dpamconfdir=/etc/pam.d      \
+              ..
+
+        LANG=en_US.UTF-8 ninja
+
+        LANG=en_US.UTF-8 DESTDIR=$PKG ninja install
+
+        rm -f /usr/bin/xsltproc
+
+#        rm -f $PKG/usr/lib/sysctl.d/50-pid-max.conf
+
+        mkdir -pv $PKG/etc/pam.d
+        cat > $PKG/etc/pam.d/systemd-user << "EOF"
+# Begin /etc/pam.d/systemd-user
+
+account  required    pam_access.so
+account  include     system-account
+
+session  required    pam_env.so
+session  required    pam_limits.so
+session  required    pam_unix.so
+session  required    pam_loginuid.so
+session  optional    pam_keyinit.so force revoke
+session  optional    pam_systemd.so
+
+auth     required    pam_deny.so
+password required    pam_deny.so
+
+# End /etc/pam.d/systemd-user
+EOF
+
+        mkdir -pv $PKG/usr/lib
+        cat > $PKG/usr/lib/os-release <<EOF
+# Begin /etc/os-release
+
+NAME=Linux From Scratch
+VERSION="20210116-systemd"
+ID=lfs
+VERSION_ID=20210116
+PRETTY_NAME="Linux From Scratch 20210116-systemd"
+ANSI_COLOR="0;34"
+CPE_NAME="cpe:/o:lfsproject:lfs:20210116"
+
+# End /etc/os-release
+EOF
+        ln -svf $PKG/usr/lib/os-release $PKG/etc/os-release
+        if [ -d /tools ]; then rm -fv /usr/lib/lib{blkid,uuid,mount}.so*; fi
+}

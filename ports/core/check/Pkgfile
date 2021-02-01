@@ -1,0 +1,17 @@
+# Description: unit testing framework for C
+# URL:         http://check.sourceforge.net/
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on:  
+
+name=check
+version=0.15.2
+release=1
+source=(https://github.com/libcheck/$name/releases/download/$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}

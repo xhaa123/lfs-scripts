@@ -1,0 +1,14 @@
+# Description: Firmware files for Linux
+# URL:         http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git;a=summary
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on:  
+
+name=linux-firmware
+version=20201218
+release=1
+source=(https://cdn.kernel.org/pub/linux/kernel/firmware/linux-firmware-$version.tar.xz)
+
+build() {
+        cd $name-$version
+        make DESTDIR=$PKG install
+}

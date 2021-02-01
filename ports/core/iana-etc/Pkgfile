@@ -1,0 +1,17 @@
+# Description: Provides data for network services and protocols
+# URL:         
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on:  
+
+name=iana-etc
+version=20201229
+release=1
+source=(https://github.com/Mic92/iana-etc/releases/download/$version/iana-etc-$version.tar.gz)
+
+build() {
+        cd $name-$version
+
+        mkdir -pv $PKG/etc
+        cp services protocols $PKG/etc
+
+}

@@ -1,0 +1,21 @@
+# Description: Unpacks .zip archives such as those made by PKZIP
+# URL:         http://www.info-zip.org
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on:  
+
+name=unzip
+version=6.0
+release=1
+source=(http://downloads.sourceforge.net/infozip/unzip60.tar.gz
+    https://lfs-hk.koddos.net/patches/blfs/svn/$name-$version-consolidated_fixes-1.patch)
+
+build() {
+	cd $name${version/./}
+
+    patch -Np1 -i ../$name-$version-consolidated_fixes-1.patch
+
+    make -f unix/Makefile generic
+
+    make prefix=$PKG/usr MANDIR=$PKG/usr/share/man/man1 \
+     -f unix/Makefile install
+}

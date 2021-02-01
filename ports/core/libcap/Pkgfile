@@ -1,0 +1,33 @@
+# Description: Implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels
+# URL:         
+# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Depends on: pam 
+
+name=libcap
+version=2.46
+release=1
+source=(https://cdn.kernel.org/pub/linux/libs/security/linux-privs/libcap2/$name-$version.tar.xz)
+
+build() {
+        cd $name-$version
+
+        sed -i '/install.*STALIBNAME/d' libcap/Makefile
+
+        make prefix=/usr lib=lib
+        make RAISE_SETFCAP=no lib=lib prefix=/usr DESTDIR=$PKG install
+        chmod -v 755 $PKG/usr/lib/libcap.so
+
+        mkdir -pv $PKG/lib
+        for libname in cap psx; do
+            mv -v $PKG/usr/lib/lib${libname}.so.* $PKG/lib
+            ln -sfv ../../lib/lib${libname}.so.2 $PKG/usr/lib/lib${libname}.so
+            chmod -v 755 $PKG/lib/lib${libname}.so.${version}
+        done
+
+        make -C pam_cap
+
+        mkdir -pv $PKG/{etc,lib}/security
+        install -v -m755 pam_cap/pam_cap.so $PKG/lib/security
+        install -v -m644 pam_cap/capability.conf $PKG/etc/security
+
+}
