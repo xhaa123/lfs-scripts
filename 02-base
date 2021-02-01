@@ -167,8 +167,15 @@ else
 	ENVLFS=/tools/bin/env
 fi
 
-PKGS="filesystem linux-api-headers man-pages glibc tzdata zlib bzip2 xz file readline m4 bc binutils gmp mpfr mpc attr acl pam shadow gcc pkg-config ncurses libcap sed psmisc iana-etc bison flex grep bash libtool gdbm gperf expat inetutils perl perl-xml-parser intltool autoconf automake kmod gettext elfutils libffi openssl python3 ninja meson coreutils check diffutils gawk findutils groff less gzip zstd iproute2 kbd libpipeline make patch man-db tar texinfo vim lz4 systemd dbus procps-ng util-linux e2fsprogs linux-firmware libarchive which cpio
-libxml2 sgml-common unzip docbook-xml docbook-xsl libxslt asciidoc dracut linux  libtasn1  p11-kit  ca-certificates wget pkgutils"
+PKGS="filesystem linux-api-headers man-pages glibc tzdata zlib bzip2 xz file readline
+m4 bc binutils gmp mpfr mpc attr acl pam shadow gcc pkg-config ncurses libcap sed
+psmisc iana-etc bison flex grep bash libtool gdbm gperf expat inetutils perl
+perl-xml-parser intltool autoconf automake kmod gettext elfutils libffi openssl
+python3 ninja meson coreutils check diffutils gawk findutils groff less gzip
+zstd iproute2 kbd libpipeline make patch man-db tar texinfo vim lz4 systemd
+dbus procps-ng util-linux e2fsprogs linux-firmware libarchive which cpio
+libxml2 sgml-common unzip docbook-xml docbook-xsl libxslt asciidoc dracut linux
+libtasn1 p11-kit ca-certificates wget pkgutils"
 
 # libnl dhcpcd wpa_supplicant lzo squashfs-tools popt efivar pciutils efibootmgr libpng freetype2 dosfstools grub-efi curl ports httpup gpm libevent links
 
