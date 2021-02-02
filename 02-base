@@ -175,9 +175,7 @@ python3 ninja meson coreutils check diffutils gawk findutils groff less gzip
 zstd iproute2 kbd libpipeline make patch man-db tar texinfo vim lz4 systemd
 dbus procps-ng util-linux e2fsprogs linux-firmware libarchive which cpio
 libxml2 sgml-common unzip docbook-xml docbook-xsl libxslt asciidoc dracut linux
-libtasn1 p11-kit ca-certificates wget pkgutils"
-
-# libnl dhcpcd wpa_supplicant lzo squashfs-tools popt efivar pciutils efibootmgr libpng freetype2 dosfstools grub-efi curl ports httpup gpm libevent links
+pkgutils prt-get"
 
 if [ ! -f $LFS/var/lib/pkg/db ]; then
 	lfs_dirs
