@@ -3,10 +3,23 @@
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-#/dev/<xxx>     /            <fff>    defaults            1     1
-#/dev/<yyy>     swap         swap     pri=1               0     0
-#/dev/<zzz>     /boot/efi    vfat     defaults            0     2
-devpts         /dev/pts     devpts   gid=5,mode=620      0     0
-tmpfs          /run         tmpfs    defaults            0     0
+
+# UUID=56638482-8f62-4e25-893c-62057ca326e2
+/dev/mapper/beginnings-root        /               btrfs           rw,relatime,space_cache,subvolid=5,subvol=/     0 0
+
+# UUID=a95f5630-6d05-49af-a92a-3bcbfdbc7fac
+/dev/mapper/beginnings-home        /home           btrfs           rw,relatime,space_cache,subvolid=5,subvol=/     0 0
+
+# UUID=d832dff3-f968-4305-a06d-aa60a294706b
+/dev/sda2               /boot           btrfs           rw,relatime,space_cache,subvolid=5,subvol=/     0 0
+
+# UUID=9568-EDD1
+/dev/sda1               /boot/efi       vfat            rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro  0 2
+
+# UUID=3e0f63c0-b4ea-4adb-a98f-bce0b3fef528
+/dev/mapper/beginnings-swap        none            swap            defaults        0 0
+
+efivarfs    /sys/firmware/efi/efivars    efivarfs    defaults    0    0
 
 # End /etc/fstab
+

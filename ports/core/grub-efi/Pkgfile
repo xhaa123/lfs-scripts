@@ -1,19 +1,20 @@
 # Description: The GRand Unified Bootloader (EFI)
 # URL:         
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  grub efivar efibootmgr freetype2 dosfstools
 
 name=grub-efi
 version=2.04
+unifont_ver=13.0.05
 release=1
 source=(https://ftp.gnu.org/gnu/grub/grub-$version.tar.xz
-        https://ftp.gnu.org/gnu/unifont/unifont-12.1.02/unifont-12.1.02.bdf.gz)
+        https://ftp.gnu.org/gnu/unifont/unifont-$unifont_ver/unifont-$unifont_ver.bdf.gz)
 
 build() {
 	cd grub-$version
 
-	gunzip $SRC/unifont-12.1.02.bdf.gz
-        cp $SRC/unifont-12.1.02.bdf unifont.bdf
+	gunzip $SRC/unifont-$unifont_ver.bdf.gz
+        cp $SRC/unifont-$unifont_ver.bdf unifont.bdf
 
         ./configure --prefix=/usr  \
             --sbindir=/sbin        \

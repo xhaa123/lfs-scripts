@@ -1,6 +1,6 @@
 # Description: Meson is an open source build system meant to be both extremely fast, as user friendly as possible
 # URL:         http://mesonbuild.com/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  ninja libffi
 
 name=meson

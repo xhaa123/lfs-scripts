@@ -1,6 +1,6 @@
 # Description: Init system to control boot, execution and halt of a linux system
 # URL:         http://www.freedesktop.org/wiki/Software/systemd/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on: pam lz4 gnu-efi 
 
 name=systemd

@@ -1,6 +1,6 @@
 # Description: A widely used XML scheme for writing documentation and help
 # URL:         https://www.oasis-open.org/docbook/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  libxml2 sgml-common unzip
 
 name=docbook-xml

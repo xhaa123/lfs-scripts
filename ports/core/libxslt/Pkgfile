@@ -1,6 +1,6 @@
 # Description: XML stylesheet transformation library
 # URL:         http://xmlsoft.org/XSLT/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on: libxml2 docbook-xml docbook-xsl
 
 name=libxslt

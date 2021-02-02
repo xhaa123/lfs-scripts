@@ -1,12 +1,12 @@
 # Description: Popt libraries which are used by some programs to parse command-line options
 # URL:         
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  
 
 name=popt
 version=1.18
 release=1
-source=(http://ftp.rpm.org/mirror/$name/$name-$version.tar.gz)
+source=(http://ftp.rpm.org/popt/releases/$name-1.x/$name-$version.tar.gz)
 
 build() {
 	cd $name-$version

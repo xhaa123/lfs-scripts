@@ -1,6 +1,6 @@
 # Description: Cross-platform IDE focused on Python application development
 # URL:         http://martine.github.io/ninja/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  python3
 
 name=ninja

@@ -1,0 +1,28 @@
+# Description: Logical Volume Manager 2 utilities
+# URL:         https://sourceware.org/lvm2/
+# Maintainer:  Future System Team
+# Depends on:  systemd libaio which
+
+name=lvm2
+version=2.03.11
+release=1
+source=(https://sourceware.org/ftp/lvm2/LVM2.$version.tgz)
+
+build() {
+	cd LVM2.$version
+
+	SAVEPATH=$PATH
+	PATH=$PATH:/sbin:/usr/sbin
+	./configure --prefix=/usr       \
+	            --exec-prefix=      \
+	            --enable-cmdlib     \
+	            --enable-pkgconfig  \
+	            --enable-udev_sync  \
+	            --enable-dmeventd
+	make
+	PATH=$SAVEPATH
+	unset SAVEPATH
+
+	make DESTDIR=$PKG install
+	make DESTDIR=$PKG install_systemd_units
+}

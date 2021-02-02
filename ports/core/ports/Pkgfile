@@ -1,6 +1,6 @@
 # Description: CRUX ports system tools
 # URL:         http://crux.nu
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  curl
 
 name=ports

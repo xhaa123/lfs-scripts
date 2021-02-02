@@ -1,6 +1,6 @@
 # Description: A text file viewer
 # URL:         http://www.greenwoodsoftware.com/less
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  ncurses
 
 name=less

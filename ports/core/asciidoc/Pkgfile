@@ -1,6 +1,6 @@
 # Description: Text document format for short documents, articles, books and UNIX man pages
 # URL:         https://asciidoc.org/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  python3
 
 name=asciidoc

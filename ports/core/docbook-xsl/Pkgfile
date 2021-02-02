@@ -1,6 +1,6 @@
 # Description: A collection of XSL stylesheets that are useful for performing transformations on XML DocBook files.
 # URL:         http://docbook.sourceforge.net/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  libxslt docbook-xml
 
 name=docbook-xsl

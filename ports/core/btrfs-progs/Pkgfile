@@ -1,0 +1,31 @@
+# Description: Btrfs filesystem utilities
+# URL:         https://btrfs.wiki.kernel.org
+# Maintainer:  Future System Team
+# Depends on:  lzo python3
+
+name=btrfs-progs
+version=5.10
+release=1
+source=(https://cdn.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v$version.tar.xz)
+
+build() {
+	cd $name-v$version
+
+	./configure --prefix=/usr \
+	            --bindir=/bin \
+	            --libdir=/lib \
+	            --disable-zstd            \
+	            --disable-documentation   \
+	            --with-pkgconfigdir=/usr/lib/pkgconfig
+
+	make
+
+	make DESTDIR=$PKG install
+
+	ln -sfv ../../lib/$(readlink $PKG/lib/libbtrfs.so) $PKG/usr/lib/libbtrfs.so
+	ln -sfv ../../lib/$(readlink $PKG/lib/libbtrfsutil.so) $PKG/usr/lib/libbtrfsutil.so
+	rm -fv $PKG/lib/libbtrfs.{a,so} $PKG/lib/libbtrfsutil.{a,so}
+
+	mkdir -pv $PKG/sbin
+	mv -v $PKG/bin/{mkfs,fsck}.btrfs $PKG/sbin
+}

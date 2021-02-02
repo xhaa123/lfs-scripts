@@ -1,6 +1,6 @@
 # Description: Copies files into or out of a cpio or tar archive.
 # URL:         http://www.gnu.org/software/cpio/
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
+# Maintainer:  Future System Team
 # Depends on:  
 
 name=cpio

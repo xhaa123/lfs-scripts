@@ -1,7 +1,7 @@
 # Description: Provides a way to load and enumerate PKCS #11 (a Cryptographic Token Interface Standard) modules
 # URL:         
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
-# Depends on: libffi btasn1 systemd 
+# Maintainer:  Future System Team
+# Depends on: libffi libtasn1 nss
 
 name=p11-kit
 version=0.23.22
@@ -11,7 +11,7 @@ source=(https://github.com/p11-glue/p11-kit/releases/download/$version/p11-kit-$
 build() {
 	cd $name-$version
 
-    sed '20,$ d' -i trust/trust-extract-compat.in
+    sed '20,$ d' -i trust/trust-extract-compat
     cat >> trust/trust-extract-compat.in << "EOF"
 # Copy existing anchor modifications to /etc/ssl/local
 /usr/libexec/make-ca/copy-trust-modifications
@@ -22,9 +22,15 @@ EOF
 
 	./configure --prefix=/usr     \
 	            --sysconfdir=/etc \
-	            --with-trust-paths=/etc/pki/anchors
+	            --with-trust-paths=/etc/pki/anchors  \
+                    --with-hash-impl=freebl
 	make
 	make DESTDIR=$PKG install
-    ln -sfv $PKG/usr/libexec/p11-kit/trust-extract-compat \
-        $PKG/usr/bin/update-ca-certificates
+
+        mkdir -pv $PKG/usr/bin
+        ln -sfv $PKG/usr/libexec/p11-kit/trust-extract-compat \
+                $PKG/usr/bin/update-ca-certificates
+
+        mkdir -pv $PKG/usr/lib
+        ln -sfv ./pkcs11/p11-kit-trust.so $PKG/usr/lib/libnssckbi.so
 }

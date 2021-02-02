@@ -1,6 +1,6 @@
 # Description: 
 # URL:         
-# Maintainer:  
+# Maintainer:  Future System Team
 # Depends on:  
 
 name=
@@ -12,6 +12,8 @@ build() {
 	cd $name-$version
 
 	./configure --prefix=/usr
+
 	make
+
 	make DESTDIR=$PKG install
 }

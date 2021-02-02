@@ -1,7 +1,7 @@
 # Description: Next generation of the python high-level scripting language
 # URL:         
-# Maintainer:  Emmett1, emmett1 dot 2miligrams at gmail dot com
-# Depends on:  libffi
+# Maintainer:  Future System Team
+# Depends on:  libffi sqlite
 
 name=python3
 version=3.9.1
@@ -11,11 +11,13 @@ source=(https://www.python.org/ftp/python/$version/Python-$version.tar.xz)
 build() {
         cd Python-$version
 
-        ./configure --prefix=/usr       \
-                    --enable-shared     \
-                    --with-system-expat \
-                    --with-system-ffi   \
-                    --with-ensurepip=yes
+	CXX="/usr/bin/g++"                 \
+        ./configure --prefix=/usr          \
+                    --enable-shared        \
+                    --with-system-expat    \
+                    --with-system-ffi      \
+                    --with-ensurepip=yes   \
+	            --enable-optimizations
         make
         make DESTDIR=$PKG install
 
