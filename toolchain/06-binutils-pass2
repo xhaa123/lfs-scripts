@@ -1,5 +1,5 @@
 name=binutils
-version=2.35.1
+version=2.36
 source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.xz)
 
 build() {
@@ -17,9 +17,11 @@ build() {
 		--disable-werror           \
 		--with-lib-path=/tools/lib \
 		--with-sysroot
+
 	make
 	make install
+
 	make -C ld clean
-	make -C ld LIB_PATH=/usr/lib:/lib:/usr/lib32
+	make -C ld LIB_PATH=/usr/lib:/lib
 	cp -v ld/ld-new /tools/bin
 }

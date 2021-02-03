@@ -120,7 +120,6 @@ LFS_TGT32=i686-lfs-linux-gnu
 MAKEFLAGS="${MAKEFLAGS:--j$(nproc)}"
 LFS="${LFS:-/mnt/lfs}"
 PKGDIR="${PKGDIR:-$CWD/pkg}"
-#SRCDIR="${SRCDIR:-$CWD/src}"
 SRCDIR="${SRCDIR:-$LFS/sources}"
 WORKDIR="${WORKDIR:-/tmp}"
 CFLAGS="${CFLAGS:--O2 -march=x86-64 -pipe}"

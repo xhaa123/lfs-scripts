@@ -4,7 +4,10 @@ source=(http://ftp.gnu.org/gnu/gettext/gettext-$version.tar.xz)
 
 build() {
 	cd $name-$version
+	
 	./configure --disable-shared
-	make -j1
+	
+	make
+	
 	cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /tools/bin
 }

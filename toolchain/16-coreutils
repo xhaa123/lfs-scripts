@@ -4,7 +4,9 @@ source=(http://ftp.gnu.org/gnu/coreutils/coreutils-$version.tar.xz)
 
 build() {
 	cd $name-$version
+	
 	./configure --prefix=/tools --enable-install-program=hostname
+	
 	make
 	make install
 }

@@ -5,7 +5,7 @@ source=(https://openssl.org/source/openssl-$version.tar.gz)
 build() {
 	cd $name-$version
 
-	./config --prefix=/tools             \
+	./config --prefix=/tools        \
 		--openssldir=/tools/etc/ssl \
 		--libdir=lib                \
 		shared                      \

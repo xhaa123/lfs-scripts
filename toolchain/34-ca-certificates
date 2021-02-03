@@ -1,0 +1,9 @@
+name=certs
+source="https://curl.haxx.se/ca/cacert.pem"
+
+build() {
+	install -Dm644 $SRC/cacert.pem /tools/etc/ssl/cert.pem
+
+	install -d /tools/etc/ssl/certs
+	ln -s /tools/etc/ssl/cert.pem /tools/etc/ssl/certs/ca-certificates.crt
+}

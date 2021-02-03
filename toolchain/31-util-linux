@@ -5,12 +5,12 @@ source=(https://www.kernel.org/pub/linux/utils/util-linux/v${version::4}/$name-$
 build() {
     	cd $name-$version
 
-        ./configure --prefix=/tools                \
-            --without-python               \
-            --disable-makeinstall-chown    \
-            --without-systemdsystemunitdir \
-            --without-ncurses              \
-            PKG_CONFIG=""    
+	./configure --prefix=/tools                \
+				--without-python               \
+				--disable-makeinstall-chown    \
+				--without-systemdsystemunitdir \
+				--without-ncurses              \
+				PKG_CONFIG="" 
     	make
     	make install
 }
